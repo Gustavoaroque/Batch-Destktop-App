@@ -26,5 +26,6 @@ class HeadSection(QWidget):
         HeadSectionLayout.addWidget(logOut_btn, alignment=Qt.AlignCenter| Qt.AlignRight)
 
         HeadSectionGroup.setLayout(HeadSectionLayout)
+        HeadSectionGroup.setStyleSheet("border:none")
         Layout.addWidget(HeadSectionGroup)
         self.setLayout(Layout)

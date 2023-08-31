@@ -2,7 +2,7 @@ import sys
 from PyQt5 import QtCore
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtWidgets import (
-    QApplication,QWidget,QVBoxLayout,QGridLayout
+    QApplication,QWidget,QVBoxLayout,QGridLayout,QHBoxLayout
 )
 
 from Head import HeadSection
@@ -13,11 +13,15 @@ class mainApp(QWidget):
         super().__init__()
 
         nav = HeadSection()
-        sect = OptionSection()
+
+        sect1 = OptionSection()
 
         layout = QVBoxLayout()
+
+
+
         layout.addWidget(nav)
-        layout.addWidget(sect)
+        layout.addWidget(sect1)
 
 
         self.setLayout(layout)
