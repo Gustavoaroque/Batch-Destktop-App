@@ -11,19 +11,22 @@ from PyQt5.QtGui import QIcon, QFont, QFontDatabase,QPixmap
 
 from Components.Button import Button
 from Components.Font import MyFonts
-
+from Components.Image import Image
 
 class mainApp(QWidget):
     def __init__(self):
         super().__init__()
+
         btn = Button("Log",240,80,323297)
         text = QLabel("Test")
         font = MyFonts(20,"Montserrat-Medium")
+        img = Image()
         text.setFont(font.get_Font())
         layout = QVBoxLayout()
 
         layout.addWidget(btn)
         layout.addWidget(text)
+        layout.addWidget(img)
 
 
         self.setLayout(layout)
