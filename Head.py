@@ -19,7 +19,7 @@ class HeadSection(QWidget):
 
         #The image can be subclassed
         image = Image("azocar_logo.png",150)
-        logOut_btn = Button("Log Out",250,80,323297)
+        logOut_btn = Button("Log Out",250,80,323297,"Montserrat-SemiBold",20)
 
 
         HeadSectionLayout.addWidget(image)
