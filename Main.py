@@ -20,7 +20,7 @@ class mainApp(QWidget):
         btn = Button("Log",240,80,323297)
         text = QLabel("Test")
         font = MyFonts(20,"Montserrat-Medium")
-        img = Image()
+        img = Image("azocar_logo.png",30)
         text.setFont(font.get_Font())
         layout = QVBoxLayout()
 

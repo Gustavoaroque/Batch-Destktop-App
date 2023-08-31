@@ -11,9 +11,10 @@ from PyQt5.QtGui import QIcon, QFont, QFontDatabase,QPixmap
 
 
 class Image(QLabel):
-        def __init__(self):
+        def __init__(self,img_name,height):
             super().__init__()
-            pixmap = QPixmap("C:\\Users\\Programador_4\\Documents\\Programs\\PyQt\\first_test\\azocar_logo.png")  # Replace with your image path
-            resize_image = pixmap.scaledToHeight(150)
+            self.dir = os.path.dirname(os.path.realpath(__file__)) + "\\Statics\\img\\" + img_name 
+            pixmap = QPixmap(self.dir)  # Replace with your image path
+            resize_image = pixmap.scaledToHeight(height)
             self.setPixmap(resize_image)
             self.setAlignment(Qt.AlignLeft)
