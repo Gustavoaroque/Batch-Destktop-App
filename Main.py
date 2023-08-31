@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import (
 
 from Head import HeadSection
 from OptionSection import OptionSection
-from Connection import Connect_to_indicator
+from Connection import *
 
 
 class mainApp(QWidget):
@@ -16,14 +16,14 @@ class mainApp(QWidget):
 
         nav = HeadSection(self.close)
 
-        # sect1 = OptionSection()
+        sect1 = OptionSection(Connect,Close)
 
         layout = QVBoxLayout()
 
 
 
         layout.addWidget(nav)
-        # layout.addWidget(sect1)
+        layout.addWidget(sect1)
 
 
         self.setLayout(layout)

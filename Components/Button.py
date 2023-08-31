@@ -9,7 +9,7 @@ class Button(QPushButton):
         self.width = width
         self.height = height
         self.color = color
-
+        self.click_function = click_function
         styles = "background-color:#"+ str(self.color)+ ";color:#FFF;"
         self.setFixedSize(self.width,self.height)
 
@@ -17,4 +17,5 @@ class Button(QPushButton):
         self.setFont(font.get_Font())           
 
         self.setStyleSheet(styles)
-        self.clicked.connect(click_function)
+        self.clicked.connect(self.click_function)
+

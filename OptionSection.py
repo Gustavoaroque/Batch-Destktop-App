@@ -7,12 +7,14 @@ from Components.Font import MyFonts
 from Components.Button import Button
 
 class OptionSection(QWidget):
-    def __init__(self):
+    def __init__(self,fn_start, fn_close):
         super().__init__()
         SectionLayout = QVBoxLayout()
         SectionGroup = QGroupBox()
         BtnLayout = QHBoxLayout()
         TextLayout = QHBoxLayout()
+        self.fn_start = fn_start
+        self.fn_start = fn_start
 
         SectionGroup.setFixedHeight(300)
         SectionGroup.setFixedWidth(800)
@@ -20,16 +22,13 @@ class OptionSection(QWidget):
         Layout = QVBoxLayout()
 
         main_text = QLabel("Estado de Comunicacion")
-        state_text = QLabel("Desconectado")
+        self.state_text = QLabel("Desconectado")
         font_text = MyFonts(20,"Montserrat-Medium")
         main_text.setFont(font_text.get_Font())
-        state_text.setFont(font_text.get_Font())
+        self.state_text.setFont(font_text.get_Font())
 
-        self.tcp_socket = QTcpSocket(self)
-        self.tcp_socket.connected.connect(self.on_connected)
-
-        Start = Button("Iniciar",250,80,323297,"Montserrat-SemiBold",24)
-        close = Button("Close",250,80,323297,"Montserrat-SemiBold",24)
+        Start = Button("Iniciar",250,80,323297,"Montserrat-SemiBold",24,self.Habilitar)
+        close = Button("Close",250,80,323297,"Montserrat-SemiBold",24,self.Desconectar)
 
         BtnLayout.addStretch(1)
         BtnLayout.addWidget(Start)
@@ -40,7 +39,7 @@ class OptionSection(QWidget):
         TextLayout.addStretch(1)
         TextLayout.addWidget(main_text)
         TextLayout.addStretch(1)
-        TextLayout.addWidget(state_text)
+        TextLayout.addWidget(self.state_text)
         TextLayout.addStretch(1)
 
         SectionLayout.addStretch(1)
@@ -54,7 +53,13 @@ class OptionSection(QWidget):
         Layout.addWidget(SectionGroup)
         self.setLayout(Layout)
 
-    def connect_to_indicator(self):
-        self.tcp_socket.connectToHost("192.168.1.86", 20001)
+    def Habilitar(self):
+        self.state_text.setStyleSheet("color:#00A52E")
+        self.state_text.setText("Conectado")
+    def Desconectar(self):
+        self.state_text.setStyleSheet("color:#CD0606")
+        self.state_text.setText("Desconectado")
+        
+
 
 
