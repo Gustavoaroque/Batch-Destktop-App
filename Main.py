@@ -6,16 +6,18 @@ from PyQt5.QtWidgets import (
 )
 
 from Head import HeadSection
+from OptionSection import OptionSection
 
 class mainApp(QWidget):
     def __init__(self):
         super().__init__()
 
         nav = HeadSection()
-
+        sect = OptionSection()
 
         layout = QVBoxLayout()
         layout.addWidget(nav)
+        layout.addWidget(sect)
 
 
         self.setLayout(layout)

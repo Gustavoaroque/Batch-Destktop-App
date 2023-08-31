@@ -11,7 +11,6 @@ from Components.Image import Image
 class HeadSection(QWidget):
     def __init__(self):
         super().__init__()
-        # self.main_window = main_window
         HeadSectionLayout = QHBoxLayout()
         HeadSectionGroup = QGroupBox()
         HeadSectionGroup.setFixedHeight(150)
