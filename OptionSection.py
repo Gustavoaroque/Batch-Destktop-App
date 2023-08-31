@@ -5,6 +5,10 @@ from PyQt5.QtWidgets import  QWidget, QVBoxLayout,QGroupBox,QLabel,QHBoxLayout
 from PyQt5.QtNetwork import QTcpSocket, QHostAddress
 from Components.Font import MyFonts
 from Components.Button import Button
+import threading
+import _thread
+from PyQt5.QtNetwork import QTcpSocket, QHostAddress
+
 
 class OptionSection(QWidget):
     def __init__(self,fn_start, fn_close):
@@ -16,6 +20,11 @@ class OptionSection(QWidget):
         self.fn_start = fn_start
         self.fn_start = fn_start
 
+        self.tcp_client = None
+        # if self.tcp_client is not None:
+        # self.socket = QTcpSocket()
+        # self.socket.connected.connect(self.Habilitar)
+
         SectionGroup.setFixedHeight(300)
         SectionGroup.setFixedWidth(800)
 
@@ -24,8 +33,12 @@ class OptionSection(QWidget):
         main_text = QLabel("Estado de Comunicacion")
         self.state_text = QLabel("Desconectado")
         font_text = MyFonts(20,"Montserrat-Medium")
+        font_info = MyFonts(10,"Montserrat-Thin")
         main_text.setFont(font_text.get_Font())
         self.state_text.setFont(font_text.get_Font())
+
+        self.info_text = QLabel("Start")
+        self.info_text.setFont(font_text.get_Font())
 
         Start = Button("Iniciar",250,80,323297,"Montserrat-SemiBold",24,self.Habilitar)
         close = Button("Close",250,80,323297,"Montserrat-SemiBold",24,self.Desconectar)
@@ -47,6 +60,7 @@ class OptionSection(QWidget):
         SectionLayout.addStretch(1)
         SectionLayout.addLayout(BtnLayout)
         SectionLayout.addStretch(1)
+        SectionLayout.addWidget(self.info_text)
 
         SectionGroup.setStyleSheet("QGroupBox { border: 3px solid #04047B; border-radius:20px;}")
         SectionGroup.setLayout(SectionLayout)
@@ -54,12 +68,35 @@ class OptionSection(QWidget):
         self.setLayout(Layout)
 
     def Habilitar(self):
-        self.state_text.setStyleSheet("color:#00A52E")
-        self.state_text.setText("Conectado")
-    def Desconectar(self):
-        self.state_text.setStyleSheet("color:#CD0606")
-        self.state_text.setText("Desconectado")
-        
+        if self.tcp_client is None:
+            self.tcp_client =QTcpSocket()
+            self.tcp_client.connected.connect(self.on_connected)
+            self.tcp_client.disconnected.connect(self.on_disconnected)
+            self.tcp_client.error.connect(self.on_error)
+            self.tcp_client.readyRead.connect(self.on_ready_read)
 
+            self.tcp_client.connectToHost("192.168.1.86",20001)
+
+    def Desconectar(self):
+        if self.tcp_client is not None:
+            self.tcp_client.disconnectFromHost()
+            self.tcp_client =None
+
+    def on_connected(self):
+        self.state_text.setStyleSheet("color:#06CD4A")
+        self.state_text.setText("Conectado")
+        
+    def on_disconnected(self):
+        self.state_text.setStyleSheet("color:#CD0606")
+        self.state_text.setText("Desconectado") 
+        self.info_text.setText("Sin Conexion")
+    
+    def on_error(self):
+        self.state_text.setText("Error")
+    
+    def on_ready_read(self):
+        print("Leyendo")
+        data = self.tcp_client.readAll().data().decode("utf-8")
+        self.info_text.setText("Received Data: " + data)
 
 
