@@ -2,7 +2,7 @@
 import typing
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtWidgets import  QWidget, QVBoxLayout,QGroupBox,QLabel,QHBoxLayout
-
+from PyQt5.QtNetwork import QTcpSocket, QHostAddress
 from Components.Font import MyFonts
 from Components.Button import Button
 
@@ -24,6 +24,9 @@ class OptionSection(QWidget):
         font_text = MyFonts(20,"Montserrat-Medium")
         main_text.setFont(font_text.get_Font())
         state_text.setFont(font_text.get_Font())
+
+        self.tcp_socket = QTcpSocket(self)
+        self.tcp_socket.connected.connect(self.on_connected)
 
         Start = Button("Iniciar",250,80,323297,"Montserrat-SemiBold",24)
         close = Button("Close",250,80,323297,"Montserrat-SemiBold",24)
@@ -51,5 +54,7 @@ class OptionSection(QWidget):
         Layout.addWidget(SectionGroup)
         self.setLayout(Layout)
 
+    def connect_to_indicator(self):
+        self.tcp_socket.connectToHost("192.168.1.86", 20001)
 
 

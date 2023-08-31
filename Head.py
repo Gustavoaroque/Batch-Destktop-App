@@ -9,7 +9,7 @@ from Components.Button import Button
 from Components.Image import Image
 
 class HeadSection(QWidget):
-    def __init__(self):
+    def __init__(self, fn):
         super().__init__()
         HeadSectionLayout = QHBoxLayout()
         HeadSectionGroup = QGroupBox()
@@ -18,7 +18,7 @@ class HeadSection(QWidget):
 
         #The image can be subclassed
         image = Image("azocar_logo.png",150)
-        logOut_btn = Button("Log Out",250,80,323297,"Montserrat-SemiBold",20)
+        logOut_btn = Button("Log Out",250,80,323297,"Montserrat-SemiBold",20,fn)
 
 
         HeadSectionLayout.addWidget(image)
