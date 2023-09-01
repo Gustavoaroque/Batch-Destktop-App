@@ -25,7 +25,7 @@ class SendCommand(QWidget):
         # self.socket = QTcpSocket()
         # self.socket.connected.connect(self.Habilitar)
 
-        SectionGroup.setFixedHeight(450)
+        SectionGroup.setFixedHeight(350)
         SectionGroup.setFixedWidth(1870)
 
         Layout = QVBoxLayout()

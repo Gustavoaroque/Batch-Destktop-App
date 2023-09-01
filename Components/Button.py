@@ -10,8 +10,20 @@ class Button(QPushButton):
         self.height = height
         self.color = color
         self.click_function = click_function
-        styles = "background-color:#"+ str(self.color)+ ";color:#FFF;"
-        self.setFixedSize(self.width,self.height)
+        self.setMinimumHeight(height)
+        self.setMinimumWidth(width)
+        # self.setFixedSize(self.width,self.height)
+        styles = "background-color:#"+ str(self.color)+ ";color:#FFF; border-radius:20px"
+        styles = '''
+                QPushButton{
+                background-color:#31317B;
+                border-radius:20px;
+                color:#FFF;
+                }
+                QPushButton:hover {
+                    background-color:#1F1F59;
+                }
+                '''
 
         font = MyFonts(point_size,font_name)
         self.setFont(font.get_Font())           

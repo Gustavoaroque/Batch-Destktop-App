@@ -26,8 +26,8 @@ class WeightCap(QWidget):
         # self.socket = QTcpSocket()
         # self.socket.connected.connect(self.Habilitar)
 
-        SectionGroup.setFixedHeight(300)
-        SectionGroup.setFixedWidth(800)
+        SectionGroup.setFixedHeight(450)
+        SectionGroup.setFixedWidth(900)
 
         Layout = QVBoxLayout()
 
@@ -45,8 +45,8 @@ class WeightCap(QWidget):
 
         self.info_text.setFont(font_text.get_Font())
 
-        Start = Button("Iniciar",250,80,323297,"Montserrat-Medium",24,self.Habilitar)
-        close = Button("Cerrar",250,80,323297,"Montserrat-Medium",24,self.Desconectar)
+        Start = Button("Iniciar",300,120,323297,"Montserrat-Medium",24,self.Habilitar)
+        close = Button("Cerrar",300,120,323297,"Montserrat-Medium",24,self.Desconectar)
 
         BtnLayout.addStretch(1)
         BtnLayout.addWidget(Start)
