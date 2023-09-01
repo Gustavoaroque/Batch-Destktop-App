@@ -17,6 +17,7 @@ class WeightCap(QWidget):
         SectionGroup = QGroupBox()
         BtnLayout = QHBoxLayout()
         TextLayout = QHBoxLayout()
+        TextResultLayout = QHBoxLayout()
         self.fn_start = fn_start
         self.fn_start = fn_start
 
@@ -32,16 +33,20 @@ class WeightCap(QWidget):
 
         main_text = QLabel("Estado de Comunicacion")
         self.state_text = QLabel("Desconectado")
-        font_text = MyFonts(20,"Montserrat-Medium")
-        font_info = MyFonts(10,"Montserrat-Thin")
-        main_text.setFont(font_text.get_Font())
-        self.state_text.setFont(font_text.get_Font())
-
         self.info_text = QLabel("Start")
+
+        font_text = MyFonts(20,"Montserrat-Medium")
+        font_info = MyFonts(20,"Montserrat-Bold")
+        result_text = MyFonts(22,"Montserrat-SemiBold")
+
+        main_text.setFont(font_text.get_Font())
+        self.state_text.setFont(font_info.get_Font())
+        result_text = self.info_text.setFont(result_text.get_Font())
+
         self.info_text.setFont(font_text.get_Font())
 
-        Start = Button("Iniciar",250,80,323297,"Montserrat-SemiBold",24,self.Habilitar)
-        close = Button("Close",250,80,323297,"Montserrat-SemiBold",24,self.Desconectar)
+        Start = Button("Iniciar",250,80,323297,"Montserrat-Medium",24,self.Habilitar)
+        close = Button("Cerrar",250,80,323297,"Montserrat-Medium",24,self.Desconectar)
 
         BtnLayout.addStretch(1)
         BtnLayout.addWidget(Start)
@@ -55,14 +60,17 @@ class WeightCap(QWidget):
         TextLayout.addWidget(self.state_text)
         TextLayout.addStretch(1)
 
+        TextResultLayout.addWidget(self.info_text,alignment=Qt.AlignCenter)
+
         SectionLayout.addStretch(1)
         SectionLayout.addLayout(TextLayout )
         SectionLayout.addStretch(1)
+        SectionLayout.addLayout(TextResultLayout)
+        SectionLayout.addStretch(1)
         SectionLayout.addLayout(BtnLayout)
         SectionLayout.addStretch(1)
-        SectionLayout.addWidget(self.info_text)
 
-        SectionGroup.setStyleSheet("QGroupBox { border: 3px solid #04047B; border-radius:20px;}")
+        SectionGroup.setStyleSheet("QGroupBox { border: 4px solid #04047B; border-radius:30px;}")
         SectionGroup.setLayout(SectionLayout)
         Layout.addWidget(SectionGroup)
         self.setLayout(Layout)
