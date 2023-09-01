@@ -26,7 +26,7 @@ class SendCommand(QWidget):
         # self.socket.connected.connect(self.Habilitar)
 
         SectionGroup.setFixedHeight(450)
-        SectionGroup.setFixedWidth(1000)
+        SectionGroup.setFixedWidth(1870)
 
         Layout = QVBoxLayout()
 
@@ -37,11 +37,11 @@ class SendCommand(QWidget):
         main_text.setFont(font_text.get_Font())
         self.state_text.setFont(font_text.get_Font())
 
-        self.info_text = QLabel("Start")
+        self.info_text = QLabel("Info")
         self.info_text.setFont(font_text.get_Font())
 
-        BackUp = Button("Conectar",250,80,323297,"Montserrat-SemiBold",24,self.Habilitar)
-        Delete = Button("Enviar",250,80,323297,"Montserrat-SemiBold",24,self.Desconectar)
+        BackUp = Button("Conectar",250,80,323297,"Montserrat-Medium",24,self.Habilitar)
+        Delete = Button("Enviar",250,80,323297,"Montserrat-Medium",24,self.Desconectar)
 
         BtnLayout.addStretch(1)
         BtnLayout.addWidget(BackUp)
@@ -51,18 +51,18 @@ class SendCommand(QWidget):
 
         TextLayout.addStretch(1)
         TextLayout.addWidget(main_text)
-        TextLayout.addStretch(1)
         TextLayout.addWidget(self.state_text)
         TextLayout.addStretch(1)
 
         SectionLayout.addStretch(1)
         SectionLayout.addLayout(TextLayout )
         SectionLayout.addStretch(1)
+        SectionLayout.addWidget(self.info_text,alignment=Qt.AlignCenter)
+        SectionLayout.addStretch(1)
         SectionLayout.addLayout(BtnLayout)
         SectionLayout.addStretch(1)
-        SectionLayout.addWidget(self.info_text)
 
-        SectionGroup.setStyleSheet("QGroupBox { border: 3px solid #04047B; border-radius:20px;}")
+        SectionGroup.setStyleSheet("QGroupBox { border: 4px solid #04047B; border-radius:20px;}")
         SectionGroup.setLayout(SectionLayout)
         Layout.addWidget(SectionGroup)
         self.setLayout(Layout)
