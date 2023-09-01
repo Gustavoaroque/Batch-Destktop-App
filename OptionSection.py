@@ -45,11 +45,11 @@ class WeightCap(QWidget):
 
         self.info_text.setFont(font_text.get_Font())
 
-        Start = Button("Iniciar",300,120,323297,"Montserrat-Medium",24,self.Habilitar)
+        self.Start = Button("Iniciar",300,120,323297,"Montserrat-Medium",24,self.Habilitar)
         close = Button("Cerrar",300,120,323297,"Montserrat-Medium",24,self.Desconectar)
 
         BtnLayout.addStretch(1)
-        BtnLayout.addWidget(Start)
+        BtnLayout.addWidget(self.Start)
         BtnLayout.addStretch(1)
         BtnLayout.addWidget(close)
         BtnLayout.addStretch(1)
@@ -92,12 +92,14 @@ class WeightCap(QWidget):
 
     def on_connected(self):
         self.state_text.setStyleSheet("color:#06CD4A")
+        self.Start.setEnabled(False)
         self.state_text.setText("Conectado")
         
     def on_disconnected(self):
         self.state_text.setStyleSheet("color:#CD0606")
         self.state_text.setText("Desconectado") 
         self.info_text.setText("Sin Conexion")
+        self.Start.setEnabled(True)
     
     def on_error(self):
         self.state_text.setText("Error")

@@ -12,8 +12,6 @@ class Button(QPushButton):
         self.click_function = click_function
         self.setMinimumHeight(height)
         self.setMinimumWidth(width)
-        # self.setFixedSize(self.width,self.height)
-        styles = "background-color:#"+ str(self.color)+ ";color:#FFF; border-radius:20px"
         styles = '''
                 QPushButton{
                 background-color:#31317B;
@@ -22,6 +20,12 @@ class Button(QPushButton):
                 }
                 QPushButton:hover {
                     background-color:#1F1F59;
+                }
+                QPushButton:disable {
+                    background-color: lightgray;
+                }
+                QPushButton:enable {
+                    background-color: #323297;
                 }
                 '''
 
