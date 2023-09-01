@@ -11,14 +11,12 @@ from PyQt5.QtNetwork import QTcpSocket, QHostAddress
 
 
 class SendCommand(QWidget):
-    def __init__(self,fn_start, fn_close):
+    def __init__(self):
         super().__init__()
         SectionLayout = QVBoxLayout()
         SectionGroup = QGroupBox()
         BtnLayout = QHBoxLayout()
         TextLayout = QHBoxLayout()
-        self.fn_start = fn_start
-        self.fn_start = fn_start
 
         self.tcp_client = None
         # if self.tcp_client is not None:
