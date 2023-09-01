@@ -12,8 +12,8 @@ from PyQt5.QtGui import QIcon, QFont, QFontDatabase,QPixmap
 class MyFonts():
     def __init__(self,size,font_name):
         self.size = size
-        self.dir = "C:\\Users\\Programador_4\\Documents\\Programs\\PyQt\\DemoDesign\\dist\\Main\\Components\\fonts\\" + font_name + ".ttf"
-        # self.dir = os.path.dirname(os.path.realpath(__file__)) + "\\Statics\\fonts\\" + font_name + ".ttf"
+        # self.dir = "C:\\Users\\Programador_4\\Documents\\Programs\\PyQt\\DemoDesign\\dist\\Main\\Components\\fonts\\" + font_name + ".ttf"
+        self.dir = os.path.dirname(os.path.realpath(__file__)) + "\\Statics\\fonts\\" + font_name + ".ttf"
     def get_Font(self):
         font = QFont()
         font.setPointSize(self.size)

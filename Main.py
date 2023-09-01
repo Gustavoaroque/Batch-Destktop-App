@@ -6,7 +6,8 @@ from PyQt5.QtWidgets import (
 )
 
 from Head import HeadSection
-from OptionSection import OptionSection
+from OptionSection import WeightCap
+from SendCommand import SendCommand
 from Connection import *
 
 
@@ -16,7 +17,8 @@ class mainApp(QWidget):
 
         nav = HeadSection(self.close)
 
-        sect1 = OptionSection(Connect,Close)
+        sect1 = WeightCap(Connect,Close)
+        command = SendCommand(Connect,Close)
 
         layout = QVBoxLayout()
 
@@ -24,6 +26,7 @@ class mainApp(QWidget):
 
         layout.addWidget(nav)
         layout.addWidget(sect1)
+        layout.addWidget(command)
 
 
         self.setLayout(layout)

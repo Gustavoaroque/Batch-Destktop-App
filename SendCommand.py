@@ -10,7 +10,7 @@ import _thread
 from PyQt5.QtNetwork import QTcpSocket, QHostAddress
 
 
-class WeightCap(QWidget):
+class SendCommand(QWidget):
     def __init__(self,fn_start, fn_close):
         super().__init__()
         SectionLayout = QVBoxLayout()
@@ -25,12 +25,12 @@ class WeightCap(QWidget):
         # self.socket = QTcpSocket()
         # self.socket.connected.connect(self.Habilitar)
 
-        SectionGroup.setFixedHeight(300)
-        SectionGroup.setFixedWidth(800)
+        SectionGroup.setFixedHeight(450)
+        SectionGroup.setFixedWidth(1000)
 
         Layout = QVBoxLayout()
 
-        main_text = QLabel("Estado de Comunicacion")
+        main_text = QLabel("Datos del Indicador")
         self.state_text = QLabel("Desconectado")
         font_text = MyFonts(20,"Montserrat-Medium")
         font_info = MyFonts(10,"Montserrat-Thin")
@@ -40,13 +40,13 @@ class WeightCap(QWidget):
         self.info_text = QLabel("Start")
         self.info_text.setFont(font_text.get_Font())
 
-        Start = Button("Iniciar",250,80,323297,"Montserrat-SemiBold",24,self.Habilitar)
-        close = Button("Close",250,80,323297,"Montserrat-SemiBold",24,self.Desconectar)
+        BackUp = Button("Conectar",250,80,323297,"Montserrat-SemiBold",24,self.Habilitar)
+        Delete = Button("Enviar",250,80,323297,"Montserrat-SemiBold",24,self.Desconectar)
 
         BtnLayout.addStretch(1)
-        BtnLayout.addWidget(Start)
+        BtnLayout.addWidget(BackUp)
         BtnLayout.addStretch(1)
-        BtnLayout.addWidget(close)
+        BtnLayout.addWidget(Delete)
         BtnLayout.addStretch(1)
 
         TextLayout.addStretch(1)
@@ -67,6 +67,7 @@ class WeightCap(QWidget):
         Layout.addWidget(SectionGroup)
         self.setLayout(Layout)
 
+
     def Habilitar(self):
         if self.tcp_client is None:
             self.tcp_client =QTcpSocket()
@@ -75,12 +76,12 @@ class WeightCap(QWidget):
             self.tcp_client.error.connect(self.on_error)
             self.tcp_client.readyRead.connect(self.on_ready_read)
 
-            self.tcp_client.connectToHost("192.168.1.86",20001)
+            self.tcp_client.connectToHost("192.168.1.86",10001)
 
     def Desconectar(self):
-        if self.tcp_client is not None:
-            self.tcp_client.disconnectFromHost()
-            self.tcp_client =None
+        command = "db.alias#1\r\n"
+        self.tcp_client.write(command.encode())
+        # print("Sent command to server:", command)
 
     def on_connected(self):
         self.state_text.setStyleSheet("color:#06CD4A")
@@ -95,8 +96,8 @@ class WeightCap(QWidget):
         self.state_text.setText("Error")
     
     def on_ready_read(self):
-        # print("Leyendo")
         data = self.tcp_client.readAll().data().decode("utf-8")
         self.info_text.setText("Received Data: " + data)
+        print(data)
 
 
