@@ -8,10 +8,10 @@ from PyQt5.QtGui import QIcon
 from Head import HeadSection
 from OptionSection import WeightCap
 from SendCommand import SendCommand
-from Connection import *
+# from Connection import *
 import os
 from LocalDB import LocadlDbSection
-from Login import Login
+# from Login import Login
 
 
 class mainApp(QWidget):
@@ -41,8 +41,8 @@ class mainApp(QWidget):
         self.setStyleSheet("background-color:#FFF")
         self.setLayout(layout)
 
-app=QApplication(sys.argv)
+# app=QApplication(sys.argv)
 
-window = Login()
-window.showFullScreen()
-app.exec()
+# window = Login()
+# window.showFullScreen()
+# app.exec()

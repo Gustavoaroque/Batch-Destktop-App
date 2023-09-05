@@ -1,10 +1,10 @@
 
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtWidgets import  QWidget, QVBoxLayout,QGroupBox,QLabel,QHBoxLayout,QLineEdit
-from PyQt5.QtNetwork import QTcpSocket, QHostAddress
+# from PyQt5.QtNetwork import QTcpSocket, QHostAddress
 from Components.Font import MyFonts
 from Components.Button import Button
-from AnotherWindow import AnotherWindow
+from AnotherWindow import DBTabel
 class LocadlDbSection(QWidget):
     def __init__(self):
         super().__init__()
@@ -38,8 +38,9 @@ class LocadlDbSection(QWidget):
         inputLine.setFixedWidth(300)
         inputLine.setStyleSheet("border: 3px solid #04047B; border-radius:10px;")
         inputLine.setFont(inputs_font.get_Font())
-        consult = Button("Ver Registros",290,80,323297,"Montserrat-Medium",20,self.NewWindow)
+        consult = Button("Ver Registros",290,80,323297,"Montserrat-Medium",20)
         
+        consult.clicked.connect(self.NewWindow)
         TitleTextLayout.addWidget(titleText,alignment=Qt.AlignCenter)
         
         InputTextLayout.addStretch(1)
@@ -65,7 +66,7 @@ class LocadlDbSection(QWidget):
         self.setLayout(Layout)
 
     def NewWindow(self,checked):
-        self.w = AnotherWindow()
+        self.w = DBTabel()
         self.w.showFullScreen()
 
     def Habilitar():

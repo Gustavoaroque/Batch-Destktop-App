@@ -19,9 +19,6 @@ class SendCommand(QWidget):
         TextLayout = QHBoxLayout()
 
         self.tcp_client = None
-        # if self.tcp_client is not None:
-        # self.socket = QTcpSocket()
-        # self.socket.connected.connect(self.Habilitar)
 
         SectionGroup.setFixedHeight(350)
         SectionGroup.setFixedWidth(1870)
@@ -38,8 +35,8 @@ class SendCommand(QWidget):
         self.info_text = QLabel("Info")
         self.info_text.setFont(font_text.get_Font())
 
-        BackUp = Button("Conectar",250,80,323297,"Montserrat-Medium",24,self.Habilitar)
-        Delete = Button("Enviar",250,80,323297,"Montserrat-Medium",24,self.Desconectar)
+        BackUp = Button("Conectar",250,80,323297,"Montserrat-Medium",24)
+        Delete = Button("Enviar",250,80,323297,"Montserrat-Medium",24)
 
         BtnLayout.addStretch(1)
         BtnLayout.addWidget(BackUp)
@@ -65,6 +62,8 @@ class SendCommand(QWidget):
         Layout.addWidget(SectionGroup)
         self.setLayout(Layout)
 
+        BackUp.clicked.connect(self.Habilitar)
+        Delete.clicked.connect(self.Send)
 
     def Habilitar(self):
         if self.tcp_client is None:
@@ -76,9 +75,10 @@ class SendCommand(QWidget):
 
             self.tcp_client.connectToHost("192.168.1.86",10001)
 
-    def Desconectar(self):
-        command = "db.alias#1\r\n"
+    def Send(self):
+        command = "db.data#1\r\n"
         self.tcp_client.write(command.encode())
+        
         # print("Sent command to server:", command)
 
     def on_connected(self):
@@ -94,8 +94,11 @@ class SendCommand(QWidget):
         self.state_text.setText("Error")
     
     def on_ready_read(self):
-        data = self.tcp_client.readAll().data().decode("utf-8")
+        data = self.tcp_client.readAll().data().decode()
         self.info_text.setText("Received Data: " + data)
-        print(data)
+        # data = data.splitlines()
+        # data1 = '1,2,3,4'.split(',')
+        # data = data.split('\r\n')
+        print(len(data))
 
 

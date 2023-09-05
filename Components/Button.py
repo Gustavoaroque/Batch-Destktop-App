@@ -4,12 +4,11 @@ from PyQt5.QtWidgets import QPushButton
 from .Font import MyFonts
 
 class Button(QPushButton):
-    def __init__(self,text,width,height,color,font_name,point_size,click_function):
+    def __init__(self,text,width,height,color,font_name,point_size):
         super().__init__(text)
         self.width = width
         self.height = height
         self.color = color
-        self.click_function = click_function
         self.setMinimumHeight(height)
         self.setMinimumWidth(width)
         styles = '''
@@ -33,5 +32,5 @@ class Button(QPushButton):
         self.setFont(font.get_Font())           
 
         self.setStyleSheet(styles)
-        self.clicked.connect(self.click_function)
+        
 

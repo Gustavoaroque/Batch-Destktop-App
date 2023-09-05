@@ -9,7 +9,7 @@ import threading
 import _thread
 from PyQt5.QtNetwork import QTcpSocket, QHostAddress
 
-
+import time 
 class WeightCap(QWidget):
     def __init__(self):
         super().__init__()
@@ -32,6 +32,7 @@ class WeightCap(QWidget):
         main_text = QLabel("Estado de Comunicacion")
         self.state_text = QLabel("Desconectado")
         self.info_text = QLabel("Start")
+        self.state_text.setStyleSheet("color:#CD0606")
 
         font_text = MyFonts(20,"Montserrat-Medium")
         font_info = MyFonts(20,"Montserrat-Bold")
@@ -43,8 +44,11 @@ class WeightCap(QWidget):
 
         self.info_text.setFont(font_text.get_Font())
 
-        self.Start = Button("Iniciar",300,120,323297,"Montserrat-Medium",24,self.Habilitar)
-        close = Button("Cerrar",300,120,323297,"Montserrat-Medium",24,self.Desconectar)
+        self.Start = Button("Iniciar",300,120,323297,"Montserrat-Medium",24)
+        close = Button("Cerrar",300,120,323297,"Montserrat-Medium",24)
+
+        self.Start.clicked.connect(self.Habilitar)
+        close.clicked.connect(self.Desconectar)
 
         BtnLayout.addStretch(1)
         BtnLayout.addWidget(self.Start)
@@ -104,7 +108,28 @@ class WeightCap(QWidget):
     
     def on_ready_read(self):
         # print("Leyendo")
-        data = self.tcp_client.readAll().data().decode("utf-8")
-        self.info_text.setText("Received Data: " + data)
+        data = self.tcp_client.readAll().data().decode()
+        print(data)
+        print(type(data))
+        if len(data)<=14:
+            # print(len(data))
+            # time.sleep(0.05)
+            new_data = ['\x02','\r\n','M','LN','KN','LG','KG']
+            for i in new_data:
+                if i in data:
+                    data = data.replace(i,"")
+        else:
+            data = data[0:14]
+            # print(len(data))
+            # time.sleep(0.05)
+            new_data = ['\x02','\r\n','M','LN','KN','LG','KG']
+            for i in new_data:
+                if i in data:
+                    data = data.replace(i,"")
+
+            # new_dt = data.strip('\r\n')
+            # new_dt = new_dt.replace("\x02","")
+
+            self.info_text.setText("Received Data: " + data)
 
 

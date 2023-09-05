@@ -1,39 +1,29 @@
 import socket
 
-def get_data_from_server(host, port):
-    try:
-        # Create a socket object
-        client_socket = socket.socket()
+# Define the server's host and port
+server_host = '192.168.1.86'  # Replace with the actual server address or hostname
+server_port = 10001             # Replace with the actual port number
 
-        # Connect to the server
-        client_socket.connect((host, port))
+# Create a socket object
+client_socket = socket.socket()
 
-        # # Send an HTTP GET request
-        # request = "\r\n"
-        # client_socket.sendall(request.encode())
+try:
+    # Connect to the server
+    client_socket.connect((server_host, server_port))
+    print(f"Connected to {server_host}:{server_port}")
 
-        # Receive and decode the response
-        response = b""
-        data = client_socket.recv(4096)
+    # Send a message to the server
+    message = "db.data#1\r\n"
+    client_socket.send(message.encode())
 
-        # response += data
-        print(data)
-        new_data = data.splitlines()
-        print( new_data[0])
-        new_data[0].strip('q')
-        # Close the socket
-        client_socket.close()
-
-        # Convert the response bytes to a string
-        response_str = response.decode("utf-8")
-
-        return response_str
-
-    except Exception as e:
-        return f"An error occurred: {e}"
-
-if __name__ == "__main__":
-    host = "192.168.1.86"
-    port = 20001
-    response = get_data_from_server(host, port)
+    # Receive and display the server's response
+    response = client_socket.recv(4096).decode()
+    # print(message)
+    # response.split('d')
     print(response)
+
+except ConnectionRefusedError:
+    print(f"Connection to {server_host}:{server_port} refused.")
+finally:
+    # Close the client socket
+    client_socket.close()

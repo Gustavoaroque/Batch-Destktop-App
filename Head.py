@@ -15,11 +15,12 @@ class HeadSection(QWidget):
         HeadSectionGroup = QGroupBox()
         HeadSectionGroup.setFixedHeight(150)
         Layout = QHBoxLayout()
+        self.fn = fn
 
         #The image can be subclassed
         image = Image("azocar_logo.png",150)
-        logOut_btn = Button("Log Out",250,80,323297,"Montserrat-SemiBold",20,fn)
-
+        logOut_btn = Button("Log Out",250,80,323297,"Montserrat-SemiBold",20)
+        logOut_btn.clicked.connect(self.closeSesion)
 
         HeadSectionLayout.addWidget(image)
         HeadSectionLayout.addStretch(1)
@@ -29,3 +30,6 @@ class HeadSection(QWidget):
         HeadSectionGroup.setStyleSheet("border:none")
         Layout.addWidget(HeadSectionGroup)
         self.setLayout(Layout)
+
+    def closeSesion(self):
+        self.fn()
