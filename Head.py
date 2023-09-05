@@ -13,12 +13,12 @@ class HeadSection(QWidget):
         super().__init__()
         HeadSectionLayout = QHBoxLayout()
         HeadSectionGroup = QGroupBox()
-        HeadSectionGroup.setFixedHeight(150)
+        HeadSectionGroup.setFixedHeight(120)
         Layout = QHBoxLayout()
         self.fn = fn
 
         #The image can be subclassed
-        image = Image("azocar_logo.png",150)
+        image = Image("azocar_logo.png",120)
         logOut_btn = Button("Log Out",250,80,323297,"Montserrat-SemiBold",20)
         logOut_btn.clicked.connect(self.closeSesion)
 

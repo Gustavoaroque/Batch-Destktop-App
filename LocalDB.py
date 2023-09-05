@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import  QWidget, QVBoxLayout,QGroupBox,QLabel,QHBoxLayout,Q
 from Components.Font import MyFonts
 from Components.Button import Button
 from AnotherWindow import DBTabel
+
+
 class LocadlDbSection(QWidget):
     def __init__(self):
         super().__init__()
@@ -17,11 +19,8 @@ class LocadlDbSection(QWidget):
         title_font = MyFonts(20,"Montserrat-Medium")
         inputs_font = MyFonts(20,"Montserrat-Regular")
         inputs_t_font = MyFonts(20,"Montserrat-Medium")
-        
-
 
         Layout = QVBoxLayout()
-
         DBGroup = QGroupBox()
 
         DBGroup.setFixedSize(900,450)
@@ -38,9 +37,11 @@ class LocadlDbSection(QWidget):
         inputLine.setFixedWidth(300)
         inputLine.setStyleSheet("border: 3px solid #04047B; border-radius:10px;")
         inputLine.setFont(inputs_font.get_Font())
-        consult = Button("Ver Registros",290,80,323297,"Montserrat-Medium",20)
+        consult_plu = Button("Ver Plu",290,80,323297,"Montserrat-Medium",20)
+        consult_batch = Button("Ver Users",290,80,323297,"Montserrat-Medium",20)
         
-        consult.clicked.connect(self.NewWindow)
+        consult_plu.clicked.connect(self.NewWindow_plu)
+        consult_batch.clicked.connect(self.NewWindow_batch)
         TitleTextLayout.addWidget(titleText,alignment=Qt.AlignCenter)
         
         InputTextLayout.addStretch(1)
@@ -48,12 +49,11 @@ class LocadlDbSection(QWidget):
         InputTextLayout.addWidget(inputLine)
         InputTextLayout.addStretch(1)
 
-        ButtonLayout.addWidget(consult,alignment=Qt.AlignCenter)
+        ButtonLayout.addWidget(consult_plu)
+        ButtonLayout.addWidget(consult_batch)
 
         SectionLayout.addStretch(1)
         SectionLayout.addLayout(TitleTextLayout)
-        SectionLayout.addStretch(1)
-        SectionLayout.addLayout(InputTextLayout)
         SectionLayout.addStretch(1)
         SectionLayout.addLayout(ButtonLayout)
         SectionLayout.addStretch(1)
@@ -65,8 +65,12 @@ class LocadlDbSection(QWidget):
 
         self.setLayout(Layout)
 
-    def NewWindow(self,checked):
-        self.w = DBTabel()
+    def NewWindow_plu(self,checked):
+        self.w = DBTabel('plu')
+        self.w.showFullScreen()
+
+    def NewWindow_batch(self,checked):
+        self.w = DBTabel('Users')
         self.w.showFullScreen()
 
     def Habilitar():
